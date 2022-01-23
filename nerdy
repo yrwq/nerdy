@@ -1,0 +1,31 @@
+#!/bin/sh
+# nerdy - nerd font glyph picker
+
+chars_loc="${HOME}/.local/share/chars.csv"
+clip="wl-copy"
+menu="wofi -dmen"
+
+[ $# -eq 0 ] && {
+    chars_csv="${chars_loc}"
+} || {
+    chars_csv="${1}"
+}
+
+# if csv file does not exist, error and exit
+[ ! -f "${chars_csv}" ] && { echo "${chars_csv} doesn't exists." >&2; exit 1; }
+
+# read in lines from code.csv into array
+readarray chars < "${chars_csv}"
+
+# print all codes and names (replacing command with space) and select using rofi
+char_entry=$(
+    for char in "${chars[@]}"; {
+        echo ${char/,/ }
+    } | ${menu}
+)
+
+[ -z "${char_entry}" ] && exit
+
+char="${char_entry% *}"
+
+printf "%s" ${char} | ${clip}
