@@ -2,17 +2,12 @@
 # nerdy - nerd font glyph picker
 
 chars_loc="${HOME}/.local/share/chars.csv"
+
 clip="wl-copy"
 menu="wofi -dmen"
 
-[ $# -eq 0 ] && {
-    chars_csv="${chars_loc}"
-} || {
-    chars_csv="${1}"
-}
-
 # if csv file does not exist, error and exit
-[ ! -f "${chars_csv}" ] && { echo "${chars_csv} doesn't exists." >&2; exit 1; }
+[ ! -f "${chars_loc}" ] && { echo "${chars_loc} doesn't exists." >&2; exit 1; }
 
 # read in lines from code.csv into array
 readarray chars < "${chars_csv}"
