@@ -5,10 +5,10 @@
 chars_loc="${HOME}/.local/share/chars.csv"
 
 # clipboard manager
-clip="wl-copy"
+clip="xclip -sel clip"
 
 # menu
-menu="wofi -dmen"
+menu="rofi -dmenu"
 
 case $1 in
     x|-x)
@@ -25,7 +25,7 @@ esac
 [ ! -f "${chars_loc}" ] && { echo "${chars_loc} doesn't exists." >&2; exit 1; }
 
 # read in lines from chars.csv into array
-readarray chars < "${chars_csv}"
+readarray chars < "${chars_loc}"
 
 # print all codes and names and select one using the menu
 char_entry=$(
@@ -39,4 +39,5 @@ char_entry=$(
 
 char="${char_entry% *}"
 
+# copy character to clipboard
 printf "%s" ${char} | ${clip}
