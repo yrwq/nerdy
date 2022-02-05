@@ -1,0 +1,26 @@
+nerdy
+-----
+
+nerd font glyph picker
+----------------------
+
+A rofi/wofi nerd font glyph picker
+
+
+requirements
+------------
+
+- rofi/wofi
+- xclip/wl-clipboard
+- a nerd font
+
+usage
+-----
+
+nerdy - defaults to x11, using rofi and xclip
+nerdy x - above
+nerdy w - uses wofi and wl-copy
+
+install
+-------
+sudo make
